@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Verify the OTP {% endblock %}
+
+
+{% block css %}
+{% endblock %}
+{% block body %}
+{% if otp %}
+<form method="POST">
+   <div class="mb-3">
+            <label for="otp" class="form-label">Enter the otp</label>
+            <input type="password" class="form-control" id="otp" name="otp">
+
+        </div>
+    <input type="hidden" name="user" value="user.username">
+<button type="submit" class="btn btn-primary">Verify OTP</button>
+</form>
+{% endif %}
+{% endblock %}
