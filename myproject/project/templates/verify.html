@@ -6,15 +6,19 @@
 {% block css %}
 {% endblock %}
 {% block body %}
-{% if otp %}
-<form method="POST">
-   <div class="mb-3">
-            <label for="otp" class="form-label">Enter the otp</label>
-            <input type="password" class="form-control" id="otp" name="otp">
 
-        </div>
-    <input type="hidden" name="user" value="user.username">
+<form action='{% url 'project:login' %}' method="POST">
+    <div class="container mt-5">
+   <div class="mb-3 col-sm-4">
+            <label for="otp" class="form-label ">Enter the OTP</label>
+            <input type="password" class="form-control " id="otp" name="otp">
+
+<br>
+
 <button type="submit" class="btn btn-primary">Verify OTP</button>
+   </div>
+    </div>
+
 </form>
-{% endif %}
+
 {% endblock %}

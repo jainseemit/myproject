@@ -1,12 +1,9 @@
 from django.contrib.auth.base_user import BaseUserManager
-
+from django.db import IntegrityError
 
 
 class UserManager(BaseUserManager):
     use_in_migrations=True
-
-
-
     def create_user(self,email,password=None,**extra_fields):
 
         if not email:
@@ -14,7 +11,13 @@ class UserManager(BaseUserManager):
         email=self.normalize_email(email)
         user=self.model(email=email, **extra_fields)
         user.set_password(password)
-        user.save(using=self._db)
+        try:
+            user.save(using=self._db)
+        except IntegrityError:
+            print("Flat no already exist")
+
+
+
         return user
 
 
