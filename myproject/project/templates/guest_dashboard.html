@@ -1,12 +1,434 @@
 {% extends 'base.html' %}
 
-{% block title %} Verify the OTP {% endblock %}
+{% block title %} Guest Dashboard {% endblock %}
 
 
-{% block css %}
-{% endblock %}
+<html lang="en">
+<head>
+
+    {% block homeactive %} active {% endblock homeactive %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% block css %}
+    body {
+    color: white;
+    background: #95D1CC;
+    font-family: 'Roboto', sans-serif;
+    overflow: scroll;
+    }
+    h4,h1{
+    color: black;
+    }
+    li {
+    color: black;
+    }
+    .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #404040;
+    color: white;
+    text-align: center;
+    }
+    .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    background-color: #a3a9ad;
+    padding: 5px;
+    }
+    .grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    background-color: #a3a9ad;
+    padding: 5px;
+    }
+    .grid-item {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    }
+    .card-block {
+    min-height: 220px;
+}
+    .main-container{
+    overflow:scroll;
+    overflow-y:auto;
+
+    }
+
+<!--    .main-container::-webkit-scrollbar {-->
+<!--  display: none;-->
+<!--}-->
+    {% endblock %}
+</head>
 {% block body %}
 
+{% if User.is_authenticated %}
+<div class="container">
+    <!--    {%for c in complaints %}-->
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 70rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{c.title}}<br><small>by {{c.author}}</small></h5>
+                    <p class="card-text">{{c.description}}</p>
+                    <p class="card-text">Reported on: {{c.date}}</p>
+                    <div class="media">
+                        <div class="media-body">
+                            <div class="mt-0">
+                                <!--                                        {% if User.is_authenticated %}-->
+                                <!--                                        {% if user.id == post.author.id %}-->
+                                <small><a href="/edit/" class="edit btn btn-warning mx-4">Edit</a></small>
+                                <small><a href="/delete/" class="Danger btn btn-warning mx-4">Delete</a></small>
+                                <!--                                        {% endif %}-->
+                                <!--                                        {% endif %}-->
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+<div class="container">
+    {%for n in notices %}
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 70rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{n.title}}<br><small>by {{n.author}}</small></h5>
+                    <p class="card-text">{{n.description}}</p>
+                    <p class="card-text">Declared on: {{n.dateTime}}</p>
+                    <div class="media">
+                        <div class="media-body">
+                            <h5 class="mt-0">
+                                {% if user.is_authenticated %}
+                                {% if user.id == post.author.id %}
+                                <small><a href="/delete/" class="edit btn btn-warning mx-4">Delete</a></small>
+                                {% endif %}
+                                {% endif %}
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+{% else %}
+<h1><strong>
+    <center> Recent News</center>
+</strong></h1>
+<!--<div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-3">-->
+<!--                    <div class="card" style="width: 70rem; height: 20rem;">-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="row">-->
+<!--                                <ul>-->
+<!--                                    <li> Elon Musk reacts with an emoji after Twitter CEO confirms he won’t join board. Musk will not be joining the board of directors of Twitter, the social media company's CEO announced late Sunday, less than a week after announcing Musk's appointment. Musk was named to the Twitter board of directors after purchasing a significant investment in the company and becoming its largest stakeholder.</li>-->
+<!--                                    <li> Uber India announces hike in cab prices due to rising fuel cost. Uber rides are set to be more expensive now. The cab services company is set to increase the fares by 12 per cent. As per the recent announcement the step has been taken in the light of increasing fuel prices. Earlier, the company had also announced a fare hike specifically for Mumbai owing to the same reason. The increased fares are supposed to cushion cab drivers from the impact of fuel price hikes.</li>-->
+<!--                                    <li> KGF 2: Yash fans create HUGE mosaic poster for actor with books! The size of the portrait is 130× 190 ft and is spread over 25650 sqft with books situated at the White Garden Grounds of Malur. This is being done by the Yash Fans Association of Mallur.</li>-->
+<!--                                    <li> Congress' Navjot Singh Sidhu makes political resurgence attempts in Punjab after poll debacle. Sidhu is still trying to hold the reins of the party even as he was asked by Congress president Sonia Gandhi to put down his papers following the embarrassing performance of the party. </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--        </div>-->
+<!--</div><br>-->
+<center><div class="main-container " style="width: 80rem; height: 15rem;">
+<div class="container-fluid">
+
+    <div class="row flex-row flex-nowrap">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">lorenipsum</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card card-block">Card</div>
+        </div>
 
 
+    </div>
+</div>
+    </div>
+</center>>
+</hr>
+    <h1><strong>
+
+        <center>Society's Flats on Rent or Buy</center>
+    </strong></h1>
+<!--    <div class="container mb-5">-->
+<!--        <div class="row">-->
+
+<!--            <div class="col-lg-4 my-4">-->
+<!--                <div class="card shadow" style="width: 20rem; height: 10rem;">-->
+<!--                    <div class="card-body">-->
+<!--                        <h4 class="card-title">-->
+<!--                            <center><strong>Rent</strong></center>-->
+<!--                        </h4>-->
+<!--                        <ul>-->
+<!--                            <li>1 BHK For 10,000&#8377</li>-->
+<!--                            <li>2 BHK For 15,000&#8377</li>-->
+<!--                            <li>3 BHK For 20,000&#8377</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg-4 my-4">-->
+<!--                <div class="card shadow" style="width: 20rem; height: 10rem;">-->
+<!--                    <div class="card-body">-->
+<!--                        <h4 class="card-title">-->
+<!--                            <center><strong> Buy </strong></center>-->
+<!--                        </h4>-->
+<!--                        <ul>-->
+<!--                            <li>1 BHK For 20,00,000&#8377</li>-->
+<!--                            <li>2 BHK For 25,00,000&#8377</li>-->
+<!--                            <li>3 BHK For 30,00,000&#8377</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+    <div class="container my-4">
+
+
+
+
+
+
+<!--Carousel Wrapper-->
+<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+  <!--Controls-->
+  <div class="controls-top">
+    <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+    <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+        class="fas fa-chevron-right"></i></a>
+  </div>
+  <!--/.Controls-->
+
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+    <li data-target="#multi-item-example" data-slide-to="1"></li>
+
+  </ol>
+  <!--/.Indicators-->
+
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+
+    <!--First slide-->
+    <div class="carousel-item active">
+
+      <div class="col-md-3" style="float:left">
+       <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">1 BHK</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="float:left">
+        <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">2 BHK</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="float:left">
+        <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">3 BHK</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Buy</a>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-3" style="float:left">
+       <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">1, 2 ,3 BHK</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Rent</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--/.First slide-->
+
+    <!--Second slide-->
+    <div class="carousel-item">
+
+      <div class="col-md-3" style="float:left">
+        <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Button</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="float:left">
+        <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(47).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Button</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="float:left">
+        <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(48).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Button</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="float:left">
+        <div class="card mb-2">
+          <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(47).jpg" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text"></p>
+            <a class="btn btn-primary">Button</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--/.Second slide-->
+
+
+
+  </div>
+  <!--/.Slides-->
+
+</div>
+<!--/.Carousel Wrapper-->
+
+            <div class="col-lg-4 my-4 " style="margin-left:25rem">
+                <div class="card shadow" style="width: 20rem; height: 10rem;">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <center><strong> Facilities </strong></center>
+                        </h4>
+                        <ul>
+                            <li>Swimming Pool</li>
+                            <li>Aerobics and Gym Center</li>
+                            <li>Creche & etc.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <h1><strong>
+        <center> Home Services</center>
+    </strong></h1>
+    <center>
+        <div style="width: 70rem;">
+            <div class="grid-container">
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}"> AC Service</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Home Service</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest'%}">Pest Control</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Groceries</a></h4></div>
+            </div>
+        </div>
+    </center>
+    <br>
+    <h1><strong>
+        <center> Other Services</center>
+    </strong></h1>
+    <center>
+        <div style="width: 90rem; height: 10rem;">
+            <div class="grid-container2">
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}"> Residents List</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Emergency Numbers</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Daily Helps</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Documents</a></h4></div>
+                <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Communications</a></h4></div>
+            </div>
+        </div>
+    </center>
+
+
+    {% endif %}
+    <div class="footer">
+        <h2>Kailash Residency</h2>
+        <p>Powder Galli, Goregaon (East) in Jhansi.
+            <strong>Secretary:</strong> A.T. Bhide Mob.no.: 1234567890</p>
+    </div>
+</html>
 {% endblock %}
+

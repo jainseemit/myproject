@@ -13,7 +13,7 @@
 
 
 
-<form action="" method="POST"> {% csrf_token %}
+<form action="{% url 'project:login' %}" method="POST"> {% csrf_token %}
   <div class="container mt-5">
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
@@ -25,7 +25,7 @@
   </div>
   <br>
   <button type="submit" class="btn btn-primary">Submit</button>
-    <a href="forget.html">Forget password</a>
+    <a href="{% url 'project:password_reset' %}">Forget password</a>
 </div>
 </form>
 

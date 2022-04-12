@@ -28,14 +28,40 @@
                 <a class="nav-link {% block homeactive %} {% endblock homeactive %}" aria-current="page" href="/project/guest/">Home</a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link {% block registeractive %} {% endblock registeractive %}" href="/project/signup/">Signup</a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link {% block loginactive %} {% endblock loginactive %}" href="/project/login/">Login</a>
+                {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'project:logout' %}">Logout</a>
+                        </li>
+                      {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'project:signup' %}">Signup</a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="{% url 'project:login' %}">Login</a>
+                        </li>
+                {% endif %}
+<!--              <li class="nav-item">-->
+<!--                <a class="nav-link {% block registeractive %} {% endblock registeractive %}" href="/project/signup/">Signup</a>-->
+<!--              </li>-->
+<!--               <li class="nav-item">-->
+<!--                <a class="nav-link {% block loginactive %} {% endblock loginactive %}" href="/project/login/">Login</a>-->
+<!--              </li>-->
+              <li>
+                     <div class="nav-item">
+  <div class="float-right form-outline" >
+    <input id="search-input" type="search" id="form1" class="form-control" />
+
+  </div>
+                       <button type="search" class="btn btn-primary">Search</button>
+
+
+</div>
               </li>
 
+
             </ul>
+
             </div>
           </div>
         </div>

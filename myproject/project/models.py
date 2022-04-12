@@ -15,12 +15,15 @@ class User(AbstractUser):
     password1 = models.CharField(max_length=25, default=0)
     password2 = models.CharField(max_length=25, default=0)
 
+
+
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-class UserOTP(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
-    time_st=models.DateTimeField(auto_now=True)
-    otp=models.SmallIntegerField()
+# class UserOTP(models.Model):
+#     user=models.ForeignKey(User, on_delete=models.CASCADE)
+#     time_st=models.DateTimeField(auto_now=True)
+#     otp=models.SmallIntegerField()
