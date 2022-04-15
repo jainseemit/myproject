@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Add News {% endblock %}
+{% block add_news_active %} active {% endblock add_news_active %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+<form action="/project/add_news/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+<div class="container mt-4">
+{{ form.as_p }}
+<button class="btn btn-primary">Add News</button>
+</div>
+</form>
+{% endblock %}

@@ -1,5 +1,6 @@
 import pdb
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
@@ -14,6 +15,8 @@ import random
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from .models import News
+from .form import NewsForm
 User = get_user_model()
 
 
@@ -102,7 +105,7 @@ def otp(request):
 
         # po = Status.objects.latest('id')
         # email = request.session['email']
-        # pdb.set_trace()
+        #pdb.set_trace()
         if OTP == int(request.POST['otp']):
             user = User.objects.get(email=request.session['email'])
             user.is_verified = True
@@ -151,9 +154,28 @@ def Logout(request):
     messages.success(request, "Successfully logged out")
     return redirect('/project/login')
 
+@login_required(login_url='/project/login')
+def add_news(request):
+    if request.method == "POST":
+        form = NewsForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            news = form.save(commit=False)
+            news.author = request.user
+            news.save()
+
+            return render(request, "add_news.html")
+    else:
+        form = NewsForm()
+    return render(request, "add_news.html", {'form': form})
+
 def guest(request):
-    return render(request,'guest_dashboard.html')
+     obj= News.objects.filter().order_by('-dateTime')
+
+     return render(request, "guest_dashboard.html", {'news': obj})
+
 
 
 def user_dashboard(request):
-    return render(request,'user_dashboard.html')
+    obj = News.objects.filter().order_by('-dateTime')
+
+    return render(request, "user_dashboard.html", {'news': obj})
