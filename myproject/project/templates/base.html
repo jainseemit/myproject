@@ -34,8 +34,13 @@
                         <a class="nav-link " aria-current="page"
                            href="/project/userdashboard/">Home</a>
                     </li>
+                    {% if user.is_superuser %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'project:add_news' %}">Add News</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'project:visitors' %}">Add Visitors</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'project:logout' %}">Logout</a>

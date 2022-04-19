@@ -83,90 +83,11 @@
 </head>
 {% block body %}
 
-{% if User.is_authenticated %}
-<div class="container">
-    <!--    {%for c in complaints %}-->
-    <br>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card" style="width: 70rem;">
 
-                <div class="card-body">
-                    <h5 class="card-title">{{c.title}}<br><small>by {{c.author}}</small></h5>
-                    <p class="card-text">{{c.description}}</p>
-                    <p class="card-text">Reported on: {{c.date}}</p>
-                    <div class="media">
-                        <div class="media-body">
-                            <div class="mt-0">
-                                <!--                                        {% if User.is_authenticated %}-->
-                                <!--                                        {% if user.id == post.author.id %}-->
-                                <small><a href="/edit/" class="edit btn btn-warning mx-4">Edit</a></small>
-                                <small><a href="/delete/" class="Danger btn btn-warning mx-4">Delete</a></small>
-                                <!--                                        {% endif %}-->
-                                <!--                                        {% endif %}-->
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    {% endfor %}
-</div>
-<div class="container">
-    {%for n in notices %}
-    <br>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card" style="width: 70rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">{{n.title}}<br><small>by {{n.author}}</small></h5>
-                    <p class="card-text">{{n.description}}</p>
-                    <p class="card-text">Declared on: {{n.dateTime}}</p>
-                    <div class="media">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                {% if user.is_authenticated %}
-                                {% if user.id == post.author.id %}
-                                <small><a href="/delete/" class="edit btn btn-warning mx-4">Delete</a></small>
-                                {% endif %}
-                                {% endif %}
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    {% endfor %}
-</div>
-{% else %}
 <h1><strong>
     <center> Recent News</center>
 </strong></h1>
-<!--<div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-3">-->
-<!--                    <div class="card" style="width: 70rem; height: 20rem;">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="row">-->
-<!--                                <ul>-->
-<!--                                    <li> Elon Musk reacts with an emoji after Twitter CEO confirms he won’t join board. Musk will not be joining the board of directors of Twitter, the social media company's CEO announced late Sunday, less than a week after announcing Musk's appointment. Musk was named to the Twitter board of directors after purchasing a significant investment in the company and becoming its largest stakeholder.</li>-->
-<!--                                    <li> Uber India announces hike in cab prices due to rising fuel cost. Uber rides are set to be more expensive now. The cab services company is set to increase the fares by 12 per cent. As per the recent announcement the step has been taken in the light of increasing fuel prices. Earlier, the company had also announced a fare hike specifically for Mumbai owing to the same reason. The increased fares are supposed to cushion cab drivers from the impact of fuel price hikes.</li>-->
-<!--                                    <li> KGF 2: Yash fans create HUGE mosaic poster for actor with books! The size of the portrait is 130× 190 ft and is spread over 25650 sqft with books situated at the White Garden Grounds of Malur. This is being done by the Yash Fans Association of Mallur.</li>-->
-<!--                                    <li> Congress' Navjot Singh Sidhu makes political resurgence attempts in Punjab after poll debacle. Sidhu is still trying to hold the reins of the party even as he was asked by Congress president Sonia Gandhi to put down his papers following the embarrassing performance of the party. </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--        </div>-->
-<!--</div><br>-->
+
 <center>
     <div class="main-container " style="width: 80rem; height: 15rem;">
         <div class="container-fluid">
@@ -176,7 +97,7 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card card-block">
 
-                       <h2><p>{{nws.title}}</p></h2>
+                        <h2><p>{{nws.title}}</p></h2>
                         <p>{{nws.author}}</p>
 
                         <p>{{nws.content}}</p>
@@ -184,7 +105,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
 
 
             </div>
@@ -210,18 +130,9 @@
             <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
                     class="fas fa-chevron-right"></i></a>
         </div>
-        <!--/.Controls-->
-
-        <!--Indicators-->
-        <!--  <ol class="carousel-indicators">-->
-        <!--    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>-->
-        <!--    <li data-target="#multi-item-example" data-slide-to="1"></li>-->
-
-        <!--  </ol>-->
-        <!--/.Indicators-->
 
         <!--Slides-->
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner" role="listbox" style="margin-left:17rem">
 
             <!--First slide-->
             <div class="carousel-item active">
@@ -232,12 +143,13 @@
                              src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
                              alt="Card image cap">
                         <div class="card-body">
-                            <h4 class="card-title">1 BHK</h4>
+                            <h4 class="card-title">1,2,3 BHK</h4>
                             <p class="card-text"></p>
-                            <a class="btn btn-primary">Buy</a>
+                            <a class="btn btn-primary" href="{% url 'project:buy' %}">Buy</a>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="col-md-3" style="float:left">
                     <div class="card mb-2">
@@ -245,43 +157,15 @@
                              src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
                              alt="Card image cap">
                         <div class="card-body">
-                            <h4 class="card-title">2 BHK</h4>
+                            <h4 class="card-title">1,2,3 BHK</h4>
                             <p class="card-text"></p>
-                            <a class="btn btn-primary">Buy</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3" style="float:left">
-                    <div class="card mb-2">
-                        <img class="card-img-top"
-                             src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">3 BHK</h4>
-                            <p class="card-text"></p>
-                            <a class="btn btn-primary">Buy</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3" style="float:left">
-                    <div class="card mb-2">
-                        <img class="card-img-top"
-                             src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title">1, 2 ,3 BHK</h4>
-                            <p class="card-text"></p>
-                            <a class="btn btn-primary">Rent</a>
+                            <a class="btn btn-primary" href="{% url 'project:rent' %}">Rent</a>
                         </div>
                     </div>
                 </div>
 
             </div>
             <!--/.First slide-->
-
-            <!--Second slide-->
 
 
         </div>
@@ -293,6 +177,7 @@
 
         <center>Society's Facilities</center>
     </strong></h1>
+    <br>
     <div class="carousel-inner" role="listbox">
 
         <!--First slide-->
@@ -357,6 +242,7 @@
 <h1><strong>
     <center> Home Services</center>
 </strong></h1>
+<br>
 <center>
     <div style="width: 70rem;">
         <div class="grid-container">
@@ -371,10 +257,11 @@
 <h1><strong>
     <center> Other Services</center>
 </strong></h1>
+<br>
 <center>
     <div style="width: 90rem; height: 10rem;">
         <div class="grid-container2">
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}"> Residents List</a></h4></div>
+            <div class="grid-item"><h4><a href="{% url 'project:resident' %}"> Residents List</a></h4></div>
             <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Emergency Numbers</a></h4></div>
             <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Daily Helps</a></h4></div>
             <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Documents</a></h4></div>
@@ -395,17 +282,18 @@
             <br>
 
             <!-- Name -->
-            <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name">
+            <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name" name="name">
 
             <!-- Email -->
-            <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail"
+                   name="email">
 
             <!-- Subject -->
 
             <select class="browser-default custom-select mb-4">
                 <option value="" disabled>Choose option</option>
-                <option value="1" selected>Feedback</option>
-                <option value="2">Complaint</option>
+                <option value=True selected name="feed">Feedback</option>
+                <option value=True name="comp">Complaint</option>
 
             </select>
 
@@ -564,9 +452,6 @@
     <!-- Copyright -->
 </footer>
 <!-- Footer -->
-
-
-{% endif %}
 
 
 </div>

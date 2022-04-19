@@ -1,0 +1,54 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %} Message Page {% endblock %}
+
+
+{% block css %}
+
+/* Using supplied code from https://www.reddit.com/r/webdev/comments/3ox80m/how_to_vertical_align_using_vh/ */
+
+.hero {
+	width:100%;
+	min-height:75vh;
+	background: no-repeat fixed url(https://i.imgur.com/Ft4pxAa.jpg) center / cover; /* from Unsplash */
+	margin-top:50px;
+
+	/* This is what centers it */
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h2 {
+	color: #FCFF33;
+	font-family: 'Museo Sans', Avenir, 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: 900;
+	font-size: 1vmin;
+	text-align: center;
+	font-size: 10vmin; /* If you want to be extra-fancy */
+	line-height: 110%;
+	text-shadow: 0.05em 0.05em 0.1em #000;
+	text-shadow: 0 0.025em 0.05em rgba(0,0,0,0.75), 0 0.05em 0.1em rgba(0,0,0,0.5);
+}
+a{
+    color:inherit;
+    }
+
+
+{% endblock %}
+{% block body %}
+
+<section class="hero">
+
+	<br>
+	<br>
+	<h2>“Someone will contact you soon"<br>
+		Thank You</h2>
+</section>
+
+<div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
+</div>
+
+{% endblock %}

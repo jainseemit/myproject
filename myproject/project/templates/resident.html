@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} Resident List {% endblock %}
+{% block residentactive %} active {% endblock residentactive %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+<h1><strong>
+    <center> Residents List</center>
+</strong></h1>
+<center>
+    <table class="table align-middle mb-0 bg-white" style="width:70%">
+        <thead class="bg-light">
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile No</th>
+            <th>Flat No</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for u in user %}
+        <tr>
+            <td>
+                <div class="d-flex align-items-center">
+
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">{{ forloop.counter }}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{ u.name }}</p>
+
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{ u.email }}</p>
+
+            </td>
+
+            <td>
+                {{ u.phone }}
+            </td>
+            <td>{{ u.flat }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</center>
+
+
+{% endblock %}

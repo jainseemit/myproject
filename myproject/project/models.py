@@ -6,15 +6,15 @@ from django.contrib.auth.models import AbstractUser
 from .manager import UserManager
 
 
+
 class User(AbstractUser):
     username = None
+    name = models.CharField(max_length=100, default=0)
     email = models.EmailField(unique=True)
     is_verified = models.BooleanField(default=False)
     flat = models.IntegerField(unique=True, default=0)
     tower = models.IntegerField(unique=True, default=0)
     phone = models.IntegerField(unique=True, default=0)
-    password1 = models.CharField(max_length=25, default=0)
-    password2 = models.CharField(max_length=25, default=0)
 
     objects = UserManager()
 
@@ -35,7 +35,22 @@ class News(models.Model):
 
 
 class Guest(models.Model):
-    email = models.EmailField(max_length=50)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(unique=False)
+    mobile = models.CharField(max_length=14)
+    flat_buy = models.BooleanField(default=False)
+    flat_rent = models.BooleanField(default=False)
+    furnished = models.CharField(max_length=100)
+    pool = models.BooleanField(null=True)
+    gym = models.BooleanField(null=True)
+    creche = models.BooleanField(null=True)
+    member = models.IntegerField(default=0)
+    flat_size = models.CharField(max_length=20)
 
+
+class Visitors(models.Model):
+    name = models.CharField(max_length=50,default='none')
+    gender = models.CharField(max_length=25)
+    mobile = models.IntegerField(default=0)
+    place = models.CharField(max_length=100,default='none')
+    dateTime = models.DateTimeField(auto_now_add=True, null=True)

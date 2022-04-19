@@ -72,7 +72,7 @@
     a{
     color:inherit;
     }
-     p{
+    p{
     color:black;
     }
 
@@ -83,107 +83,28 @@
 </head>
 {% block body %}
 
-{% if User.is_authenticated %}
-<div class="container">
-    <!--    {%for c in complaints %}-->
-    <br>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card" style="width: 70rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">{{c.title}}<br><small>by {{c.author}}</small></h5>
-                    <p class="card-text">{{c.description}}</p>
-                    <p class="card-text">Reported on: {{c.date}}</p>
-                    <div class="media">
-                        <div class="media-body">
-                            <div class="mt-0">
-                                <!--                                        {% if User.is_authenticated %}-->
-                                <!--                                        {% if user.id == post.author.id %}-->
-                                <small><a href="/edit/" class="edit btn btn-warning mx-4">Edit</a></small>
-                                <small><a href="/delete/" class="Danger btn btn-warning mx-4">Delete</a></small>
-                                <!--                                        {% endif %}-->
-                                <!--                                        {% endif %}-->
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    {% endfor %}
-</div>
-<div class="container">
-    {%for n in notices %}
-    <br>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card" style="width: 70rem;">
-
-                <div class="card-body">
-                    <h5 class="card-title">{{n.title}}<br><small>by {{n.author}}</small></h5>
-                    <p class="card-text">{{n.description}}</p>
-                    <p class="card-text">Declared on: {{n.dateTime}}</p>
-                    <div class="media">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                {% if user.is_authenticated %}
-                                {% if user.id == post.author.id %}
-                                <small><a href="/delete/" class="edit btn btn-warning mx-4">Delete</a></small>
-                                {% endif %}
-                                {% endif %}
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    {% endfor %}
-</div>
-{% else %}
+<br>
 <h1><strong>
     <center> Recent News</center>
 </strong></h1>
-<!--<div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-3">-->
-<!--                    <div class="card" style="width: 70rem; height: 20rem;">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="row">-->
-<!--                                <ul>-->
-<!--                                    <li> Elon Musk reacts with an emoji after Twitter CEO confirms he won’t join board. Musk will not be joining the board of directors of Twitter, the social media company's CEO announced late Sunday, less than a week after announcing Musk's appointment. Musk was named to the Twitter board of directors after purchasing a significant investment in the company and becoming its largest stakeholder.</li>-->
-<!--                                    <li> Uber India announces hike in cab prices due to rising fuel cost. Uber rides are set to be more expensive now. The cab services company is set to increase the fares by 12 per cent. As per the recent announcement the step has been taken in the light of increasing fuel prices. Earlier, the company had also announced a fare hike specifically for Mumbai owing to the same reason. The increased fares are supposed to cushion cab drivers from the impact of fuel price hikes.</li>-->
-<!--                                    <li> KGF 2: Yash fans create HUGE mosaic poster for actor with books! The size of the portrait is 130× 190 ft and is spread over 25650 sqft with books situated at the White Garden Grounds of Malur. This is being done by the Yash Fans Association of Mallur.</li>-->
-<!--                                    <li> Congress' Navjot Singh Sidhu makes political resurgence attempts in Punjab after poll debacle. Sidhu is still trying to hold the reins of the party even as he was asked by Congress president Sonia Gandhi to put down his papers following the embarrassing performance of the party. </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--        </div>-->
-<!--</div><br>-->
+<br>
+
 <center>
     <div class="main-container " style="width: 80rem; height: 15rem;">
         <div class="container-fluid">
 
             <div class="row flex-row flex-nowrap">
-                  {% for nws in news %}
+                {% for nws in news %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card card-block">
 
-                       <h2><p>{{nws.title}}</p></h2>
+                        <h2><p>{{nws.title}}</p></h2>
 
                         <p>{{nws.content}}</p>
 
                     </div>
                 </div>
                 {% endfor %}
-
 
 
             </div>
@@ -193,105 +114,56 @@
 <h1><strong>
     <center> Visitors</center>
 </strong></h1>
+<br>
 <center>
-<table class="table align-middle mb-0 bg-white" style="width:70%">
-  <thead class="bg-light">
-    <tr>
-      <th>Name</th>
-      <th>Profession</th>
-      <th>Flat No</th>
-      <th>Mobile No</th>
+    <table class="table align-middle mb-0 bg-white" style="width:70%">
+        <thead class="bg-light">
+        <tr>
+            <th>S. No</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Mobile No</th>
+            <th>Address</th>
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <div class="d-flex align-items-center">
-          <img
-              src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-              alt=""
-              style="width: 45px; height: 45px"
-              class="rounded-circle"
-              />
-          <div class="ms-3">
-            <p class="fw-bold mb-1">John Doe</p>
-            <p class="text-muted mb-0">john.doe@gmail.com</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">Software engineer</p>
-        <p class="text-muted mb-0">IT department</p>
-      </td>
-      <td>
-          1
-      </td>
-      <td>111111</td>
+        </tr>
+        </thead>
+        <tbody>
 
-    </tr>
-    <tr>
-      <td>
-        <div class="d-flex align-items-center">
-          <img
-              src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-              class="rounded-circle"
-              alt=""
-              style="width: 45px; height: 45px"
-              />
-          <div class="ms-3">
-            <p class="fw-bold mb-1">Alex Ray</p>
-            <p class="text-muted mb-0">alex.ray@gmail.com</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">Consultant</p>
-        <p class="text-muted mb-0">Finance</p>
-      </td>
-     <td>
-          1
-      </td>
-      <td>11111</td>
+        {% for vis in visitor %}
+        <tr>
+            <td>
+               {{ forloop.counter }}
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
 
-    </tr>
-    <tr>
-      <td>
-        <div class="d-flex align-items-center">
-          <img
-              src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-              class="rounded-circle"
-              alt=""
-              style="width: 45px; height: 45px"
-              />
-          <div class="ms-3">
-            <p class="fw-bold mb-1">Kate Hunington</p>
-            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">Designer</p>
-        <p class="text-muted mb-0">UI/UX</p>
-      </td>
-      <td>
-          1
-      </td>
-      <td>11111111</td>
-      <td>
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">{{ vis.name }}</p>
 
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{ vis.gender }}</p>
+            </td>
+            <td>
+                {{ vis.mobile }}
+            </td>
+            <td>{{ vis.place }}</td>
 
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
 </center>
-
-
+<br>
+<br>
 
 <h1><strong>
     <center> Home Services</center>
 </strong></h1>
+<br>
 <center>
     <div style="width: 70rem;">
         <div class="grid-container">
@@ -302,14 +174,17 @@
         </div>
     </div>
 </center>
+
+<br>
 <br>
 <h1><strong>
     <center> Other Services</center>
 </strong></h1>
+<br>
 <center>
     <div style="width: 90rem; height: 6rem;">
         <div class="grid-container2">
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}"> Residents List</a></h4></div>
+            <div class="grid-item"><h4><a href="{% url 'project:resident' %}"> Residents List</a></h4></div>
             <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Emergency Numbers</a></h4></div>
             <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Daily Helps</a></h4></div>
             <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Documents</a></h4></div>
@@ -317,9 +192,12 @@
         </div>
     </div>
 </center>
+<br>
+<br>
 <h1><strong>
     <center> Payment and Charges</center>
 </strong></h1>
+<br>
 <center>
     <div style="width: 70rem;">
         <div class="grid-container">
@@ -330,8 +208,9 @@
         </div>
     </div>
 </center>
+<br>
 <!-- Grid container -->
-<div class="container p-4" >
+<div class="container p-4">
     <!-- Section: Social media -->
     <section class="mb-4" style="background-color:rgba(255,255,255, .5);">
         <!-- Default form contact -->
@@ -371,6 +250,7 @@
 </div>
 
 </section>
+<br>
 <!-- Default form contact -->
 <footer class="bg-dark text-center text-white">
     <!-- Grid container -->
@@ -512,13 +392,6 @@
     <!-- Copyright -->
 </footer>
 <!-- Footer -->
-
-
-{% endif %}
-
-
-</div>
-
 </html>
 {% endblock %}
 
