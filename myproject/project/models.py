@@ -6,7 +6,6 @@ from django.contrib.auth.models import AbstractUser
 from .manager import UserManager
 
 
-
 class User(AbstractUser):
     username = None
     name = models.CharField(max_length=100, default=0)
@@ -49,8 +48,22 @@ class Guest(models.Model):
 
 
 class Visitors(models.Model):
-    name = models.CharField(max_length=50,default='none')
+    name = models.CharField(max_length=50, default='none')
     gender = models.CharField(max_length=25)
     mobile = models.IntegerField(default=0)
-    place = models.CharField(max_length=100,default='none')
+    place = models.CharField(max_length=100, default='none')
     dateTime = models.DateTimeField(auto_now_add=True, null=True)
+
+
+class Complain(models.Model):
+    name = models.CharField(max_length=50, default='none')
+    email = models.EmailField(max_length=25)
+    value = models.CharField(null=True,max_length=25)
+    message = models.TextField(max_length=1000, default='none')
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50, default='none')
+    email = models.EmailField(max_length=25)
+    subject = models.CharField(null=True,max_length=100)
+    message = models.TextField(max_length=1000, default='none')
+

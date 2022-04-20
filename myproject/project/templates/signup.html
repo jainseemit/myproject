@@ -10,36 +10,36 @@
 <form action="{% url 'project:signup' %}" method="POST"> {% csrf_token %}
     <div class="container mt-5">
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="name" class="form-control" id="name" name="name">
+            <label for="name" class="form-label" >Name</label>
+            <input type="name" class="form-control" id="name" name="name" required>
         </div>
          <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
         <div class="mb-3">
             <label for="tower" class="form-label">Tower No</label>
-            <input type="text" class="form-control" id="tower" name="tower">
+            <input type="text" class="form-control" id="tower" name="tower" required>
         </div>
         <div class="mb-3">
             <label for="Flat" class="form-label">Flat No</label>
-            <input type="text" class="form-control" id="flat" name="flat">
+            <input type="text" class="form-control" id="flat" name="flat"required>
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone No</label>
-            <input type="text" class="form-control" id="phone" name="phone">
+            <input type="text" class="form-control" id="phone" name="phone" required>
         </div>
 
 
 
         <div class="mb-3">
             <label for="password1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password1" name="password1">
+            <input type="password" class="form-control" id="password1" name="password1" required>
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="password2" name="password2">
+            <input type="password" class="form-control" id="password2" name="password2" required>
 
 
         </div>

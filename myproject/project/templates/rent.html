@@ -141,13 +141,13 @@ a{
                 <hr>
 
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" required>
 
                 <label for="mobile">Mobile No:</label>
-                <input type="number" id="mobile" name="mobile">
+                <input type="number" id="mobile" name="mobile" required>
 
 
             </fieldset>
@@ -158,28 +158,28 @@ a{
 
                 <br>
                 <strong><label>Flat size:</label></strong>
-                <input type="radio" id="1bhk" name="flat_size" value="1 BHK"><label for="1bhk" class="light"> 1 BHK </label><br>
-                <input type="radio" id="2bhk" name="flat_size" value="2 BHK"><label for="2bhk" class="light"> 2 BHK </label><br>
-                <input type="radio" id="3bhk" name="flat_size" value="3 BHK"><label for="3bhk" class="light"> 3 BHK </label><br>
+                <input type="radio" id="1bhk" name="flat_size" value="1 BHK" required><label for="1bhk" class="light"> 1 BHK </label><br>
+                <input type="radio" id="2bhk" name="flat_size" value="2 BHK" required><label for="2bhk" class="light"> 2 BHK </label><br>
+                <input type="radio" id="3bhk" name="flat_size" value="3 BHK" required><label for="3bhk" class="light"> 3 BHK </label><br>
 
                 <br>
                 <strong><label>Flat type:</label></strong>
-                <input type="radio" id="furnished" name="flat_type"><label for="furnished" class="light">Furnished</label><br>
-                <input type="radio" id="Not furnished" name="flat_type"><label for="Not furnished" class="light">Non-furnished</label>
+                <input type="radio" id="furnished" name="flat_type" required><label for="furnished" class="light">Furnished</label><br>
+                <input type="radio" id="Not furnished" name="flat_type" required><label for="Not furnished" class="light" >Non-furnished</label>
 
                 <br>
                 <br>
                 <strong><label for="members">No of members:</label></strong>
-                <input type="number" id="members" name="member">
+                <input type="number" id="members" name="member" required>
 
                 <br>
 
 
                 <strong><label>Facilities:</label></strong>
-                <input type="checkbox" id="pool" value=True name="pool"><label
+                <input type="checkbox" id="pool" value=True name="pool" required><label
                     class="light" for="pool">Pool</label><br>
-                <input type="checkbox" id="gym" value=True name="gym"><label class="light" for="gym">Gym</label><br>
-                <input type="checkbox" id="creche" value=True name="creche"><label class="light"
+                <input type="checkbox" id="gym" value=True name="gym" required><label class="light" for="gym">Gym</label><br>
+                <input type="checkbox" id="creche" value=True name="creche" required><label class="light"
                                                                                        for="creche">Creche</label>
 
             </fieldset>

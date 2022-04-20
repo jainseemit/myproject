@@ -12,6 +12,10 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("add_news/", views.add_news, name="add_news"),
     path("visitors/", views.visitors, name="visitors"),
+    path("complain/", views.complain, name="complain"),
+    path("complain/", views.complain_user, name="complainuser"),
+    path("contact/", views.contact_user, name="contactuser"),
+    path("contact/", views.contact, name="contact"),
 
     path("rent/", views.rent, name="rent"),
     path("buy/", views.buy, name="buy"),

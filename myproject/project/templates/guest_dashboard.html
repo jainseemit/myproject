@@ -274,7 +274,8 @@
     <!-- Section: Social media -->
     <section class="mb-4" style="background-color:rgba(255,255,255, .5);">
         <!-- Default form contact -->
-        <form class="text-center border border-light p-5" action="#!">
+        <form class="text-center border border-light p-5" action="{% url 'project:complain' %}" method="POST">
+            {% csrf_token %}
 
             <h1><strong>
                 <center> Complaint and Suggestion</center>
@@ -282,25 +283,26 @@
             <br>
 
             <!-- Name -->
-            <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name" name="name">
+            <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name" name="name"
+                   required>
 
             <!-- Email -->
             <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail"
-                   name="email">
+                   name="email" required>
 
             <!-- Subject -->
 
-            <select class="browser-default custom-select mb-4">
+            <select class="browser-default custom-select mb-4" name="value" required>
                 <option value="" disabled>Choose option</option>
-                <option value=True selected name="feed">Feedback</option>
-                <option value=True name="comp">Complaint</option>
+                <option value='Feedback' selected>Feedback</option>
+                <option value='Complaint'>Complaint</option>
 
             </select>
 
             <!-- Message -->
             <div class="form-group">
                 <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
-                          placeholder="Message"></textarea>
+                          placeholder="Message" name="message" required></textarea>
             </div>
 
 
@@ -308,9 +310,10 @@
             <button class="btn btn-primary" type="submit">Send</button>
 
         </form>
+    </section>
 </div>
 
-</section>
+
 <!-- Default form contact -->
 <footer class="bg-dark text-center text-white">
     <!-- Grid container -->
@@ -368,7 +371,9 @@
                     <center>
                         <div class="col-md-9 mb-md-0 mb-5">
 
-                            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                            <form id="contact-form" name="contact-form" action="{% url 'project:contact' %}"
+                                  method="POST">
+                                 {% csrf_token %}
 
                                 <!--Grid row-->
                                 <div class="row">
@@ -376,7 +381,7 @@
                                     <!--Grid column-->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" id="name" name="name" class="form-control">
+                                            <input type="text" id="name" name="name" class="form-control" required>
                                             <label for="name" class="">Your name</label>
                                         </div>
                                     </div>
@@ -385,7 +390,7 @@
                                     <!--Grid column-->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" id="email" name="email" class="form-control">
+                                            <input type="text" id="email" name="email" class="form-control" required>
                                             <label for="email" class="">Your email</label>
                                         </div>
                                     </div>
@@ -398,7 +403,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="md-form mb-0">
-                                            <input type="text" id="subject" name="subject" class="form-control">
+                                            <input type="text" id="subject" name="subject" class="form-control"
+                                                   required>
                                             <label for="subject" class="">Subject</label>
                                         </div>
                                     </div>
@@ -413,31 +419,31 @@
 
                                         <div class="md-form">
                                             <textarea type="text" id="message" name="message" rows="2"
-                                                      class="form-control md-textarea"></textarea>
+                                                      class="form-control md-textarea" required></textarea>
                                             <label for="message">Your message</label>
                                         </div>
 
                                     </div>
                                 </div>
                                 <!--Grid row-->
+                                <center>
+
+                                    <button class="btn btn-primary" type="submit">Send</button>
+
+                                </center>
 
                             </form>
 
+                            <div class="status"></div>
+                        </div>
+                        <!--Grid column-->
 
-                            <div class="text-center text-md-center">
-                                <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-                            </div>
-                    </center>
-                    <div class="status"></div>
+
                 </div>
-                <!--Grid column-->
 
-
-    </div>
-
-    </section>
-    <!--Section: Contact v.2-->
-    </section>
+            </section>
+            <!--Section: Contact v.2-->
+        </section>
 
     </div>
     <!-- Grid container -->
