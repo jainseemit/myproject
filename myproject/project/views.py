@@ -15,7 +15,7 @@ import random
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from .models import News, Guest, Visitors
+from .models import News, Guest, Visitors, Complain, Contact
 from .form import NewsForm
 
 User = get_user_model()
@@ -224,3 +224,51 @@ def visitors(request):
         vis.save()
         return redirect('project:userdashboard')
     return render(request, "visitors.html")
+
+def complain_user(request):
+    if request.method == "POST":
+        vis = Complain.objects.create()
+
+        vis.name = request.POST['name']
+        vis.email = request.POST['email']
+        vis.value = request.POST['value']
+        vis.message = request.POST['message']
+        vis.save()
+        return redirect('project:userdashboard')
+    return render(request, "user_dashboard.html")
+
+def complain(request):
+    if request.method == "POST":
+        vis = Complain.objects.create()
+
+        vis.name = request.POST['name']
+        vis.email = request.POST['email']
+        vis.value = request.POST['value']
+        vis.message = request.POST['message']
+        vis.save()
+        return redirect('project:guest')
+    return render(request, "guest_dashboard.html")
+
+def contact(request):
+    if request.method == "POST":
+        vis = Contact.objects.create()
+
+        vis.name = request.POST['name']
+        vis.email = request.POST['email']
+        vis.subject = request.POST['subject']
+        vis.message = request.POST['message']
+        vis.save()
+        return redirect('project:guest')
+    return render(request, "guest_dashboard.html")
+
+def contact_user(request):
+    if request.method == "POST":
+        vis = Contact.objects.create()
+
+        vis.name = request.POST['name']
+        vis.email = request.POST['email']
+        vis.subject = request.POST['subject']
+        vis.message = request.POST['message']
+        vis.save()
+        return redirect('project:userdashboard')
+    return render(request, "user_dashboard.html")
