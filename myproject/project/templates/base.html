@@ -53,7 +53,7 @@
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page"
-                           href="/project/guest/">Home</a>
+                           href="{% url 'project:guest' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'project:signup' %}">Signup</a>
@@ -70,8 +70,8 @@
                     <!--                <a class="nav-link {% block loginactive %} {% endblock loginactive %}" href="/project/login/">Login</a>-->
                     <!--              </li>-->
                     <li>
-                        <div class="nav-item ">
-                            <div class="float-left form-outline">
+                        <div class="nav-item " >
+                            <div class="float-left form-outline" >
                                 <input id="search-input" type="search" id="form1" class="form-control"/>
 
                             </div>

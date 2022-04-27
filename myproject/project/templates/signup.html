@@ -4,12 +4,20 @@
 {% block registeractive %} active {% endblock registeractive %}
 
 {% block css %}
+body{
+ background-image:
+    url("https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 {% endblock %}
 {% block body %}
 
 <form action="{% url 'project:signup' %}" method="POST"> {% csrf_token %}
-    <div class="container mt-5">
-        <div class="mb-3">
+    <div class="container mt-5" style="background-color:rgba(255,255,255, .5); width:700px; font-size:24px">
+        <div class="mb-3" style="padding:2px; margin-top:2rem">
+            <br>
             <label for="name" class="form-label" >Name</label>
             <input type="name" class="form-control" id="name" name="name" required>
         </div>
@@ -20,15 +28,15 @@
 
         <div class="mb-3">
             <label for="tower" class="form-label">Tower No</label>
-            <input type="text" class="form-control" id="tower" name="tower" required>
+            <input type="number" class="form-control" id="tower" name="tower" required onkeypress="return event.charCode >= 48" min="1">
         </div>
         <div class="mb-3">
             <label for="Flat" class="form-label">Flat No</label>
-            <input type="text" class="form-control" id="flat" name="flat"required>
+            <input type="number" class="form-control" id="flat" name="flat"required onkeypress="return event.charCode >= 48" min="1">
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone No</label>
-            <input type="text" class="form-control" id="phone" name="phone" required>
+            <input type="number" class="form-control" id="phone" name="phone" required onkeypress="return event.charCode >= 48" min="1">
         </div>
 
 
@@ -44,9 +52,11 @@
 
         </div>
 
-
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <center>
+        <button type="submit" class="btn btn-primary">Send OTP</button>
+        </center>
+        <br>
     </div>
 </form>
        {% if error %}

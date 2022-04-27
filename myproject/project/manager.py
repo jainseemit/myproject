@@ -14,10 +14,6 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
-        try:
-            user.save(using=self._db)
-        except IntegrityError:
-            print("Flat no already exist")
 
         return user
 

@@ -17,7 +17,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from .models import News, Guest, Visitors, Complain, Contact
 from .form import NewsForm
-
+from .tasks import send_email_task
 User = get_user_model()
 
 
@@ -31,7 +31,7 @@ def signup(request):
             tower = request.POST['tower']
             password1 = request.POST['password1']
             password2 = request.POST['password2']
-            print(password1)
+
             if password1 != password2:
                 messages.error(request, "Passwords do not match.")
                 return render(request, 'signup.html', {'error': "Password does not match"})
@@ -48,16 +48,6 @@ def signup(request):
             user.is_active = False
             user.save()
 
-            mess = f"Hello {user.email}, \n Your OTP is {user_otp} \n Thank You"
-
-            send_mail(
-                "Welcome",
-                mess,
-                settings.EMAIL_HOST_USER,
-                [user.email],
-                fail_silently=False
-            )
-
             return redirect('project:verify')
     except IntegrityError:
         q = email + ' already exist'
@@ -65,47 +55,26 @@ def signup(request):
     return render(request, "signup.html")
 
 
-# def otp(request):
-#     if request.method == "POST":
-#         get_otp = request.POST.get('otp')
-#         # if get_otp:
-#         #     get_user = request.POST.get('user')
-#         #     usr = User.objects.get(username=get_user)
-#         #     if int(get_otp) == UserOTP.objects.filter(user=usr).last().otp:
-#         #         return render(request, "login.html")
-#         #pdb.set_trace()
-#         for key,value in request.session.items():
-#             print(key)
-#         usr=User.objects.get(email=request.session['email'])
-#         print(usr)
-#         print(UserOTP.objects.filter(usr))
-#         pdb.set_trace()
-#         user= UserOTP.objects.filter(usr)
-#         if user.user_otp == get_otp:
-#             # user=User.objects.get(email=request.POST['email'])
-#             # user.save()
-#             user.is_active=True
-#             user.save()
-#             return redirect('project:login')
-#         else:
-#             return redirect('project:verify')
-#             messages.error(request, f'You entered the wrong OTP')
-#     return render(request,'verify.html')
-
 def otp(request):
-    # OTP = send_otp(request.session['email'])
-    OTP = request.session['otp']
-    if request.method == "POST":
+    if request.method == "GET":
+        user_otp = random.randint(1000, 9999)
+        email = request.session['email']
+        request.session['otp'] = user_otp
+
+        send_email_task.delay(email, user_otp)
+
+    else:
+        OTP = request.session['otp']
 
         if OTP == int(request.POST['otp']):
             user = User.objects.get(email=request.session['email'])
             user.is_verified = True
             user.is_active = True
-            # pdb.set_trace()
             user.save()
             return redirect('project:login')
         else:
-            return render(request, 'verify.html', {'error': "OTP does not match. recheck it"})
+            return render(request, 'verify.html', {'error': "OTP does not match. recheck it or resend it"})
+
     return render(request, 'verify.html')
 
 
@@ -113,39 +82,65 @@ def login(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        print(password, "password")
 
         user = authenticate(request, email=email, password=password)
 
         if user is not None:
+            request.session['uid'] = request.POST['email'] #creating a session key for the current user email
             log(request, user)
-
             return redirect("/project/userdashboard")
         else:
             return render(request, 'login.html', {'error': "Invalid Credentials"})
     return render(request, "login.html")
 
 
-# user = request.user
-#
-#   if request.POST:
-#       form = LoginForm(request.POST)
-#       if form.is_valid():
-#           email = request.POST['email']
-#           password = request.POST['password']
-#           user = authenticate(email=email, password=password)
-#           if user:
-#               # here wer are allowing the user to login.
-#               login(request,user)
-#               return redirect('user_login:dashboard')
-
 def Logout(request):
     logout(request)
     return redirect('/project/login')
 
 
+def resetpassword(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        request.session['email'] = email
+        try:
+            User.objects.get(email=email)
+            mess = f"Hello , \n Your reset password link is 'http://127.0.0.1:8000/project/setpassword' \n Thank You"
+
+            send_mail(
+                "Welcome",
+                mess,
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False
+            )
+
+            error = 'Please Check You Email'
+            return render(request, 'reset_pass.html', {'error': error})
+        except User.DoesNotExist:
+            error = 'Please enter valid email Thank You'
+            return render(request, 'reset_pass.html', {'error': error})
+    return render(request, 'reset_pass.html')
+
+
+def setpassword(request):
+    if request.method == "POST":
+        email = request.session['email']
+
+        try:
+            user = User.objects.get(email=email)
+            user.set_password(request.POST.get('password'))
+            user.save()
+            return redirect('project:login')
+        except User.DoesNotExist:
+            error = 'User Does Not Exist Please enter valid email Thank You'
+            return render(request, 'setpassword.html', {'error': error})
+    return render(request, 'setpassword.html')
+
+
 @login_required(login_url='/project/login')
 def add_news(request):
+    form = NewsForm()
     if request.method == "POST":
         form = NewsForm(data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -153,9 +148,8 @@ def add_news(request):
             news.author = request.user
             news.save()
 
-            return render(request, "add_news.html")
-    else:
-        form = NewsForm()
+            return redirect("/project/userdashboard/")
+
     return render(request, "add_news.html", {'form': form})
 
 
@@ -168,7 +162,11 @@ def guest(request):
 def user_dashboard(request):
     obj = News.objects.filter().order_by('-dateTime')
     obj1 = Visitors.objects.filter().order_by('-dateTime')
-    return render(request, "user_dashboard.html", {'news': obj, 'visitor': obj1})
+    if request.session.has_key('uid'):      #checking the key for the session
+        return render(request, "user_dashboard.html", {'news': obj, 'visitor': obj1})
+    else:
+        return redirect('/project/login')
+
 
 
 def rent(request):
@@ -210,13 +208,12 @@ def message(request):
 
 def resident(request):
     usr = User.objects.filter().order_by('name')
-    return render(request, 'resident.html', {'user': usr})
+    return render(request, 'resident.html', {'users': usr})
 
 
 def visitors(request):
     if request.method == "POST":
-        vis = Visitors.objects.create()
-
+        vis = Visitors.objects.create()  # creating object of Visitor class
         vis.name = request.POST['name']
         vis.gender = request.POST['gender']
         vis.mobile = request.POST['mobile']
@@ -225,9 +222,10 @@ def visitors(request):
         return redirect('project:userdashboard')
     return render(request, "visitors.html")
 
+
 def complain_user(request):
     if request.method == "POST":
-        vis = Complain.objects.create()
+        vis = Complain.objects.create()  # creating object of complain class
 
         vis.name = request.POST['name']
         vis.email = request.POST['email']
@@ -237,9 +235,10 @@ def complain_user(request):
         return redirect('project:userdashboard')
     return render(request, "user_dashboard.html")
 
+
 def complain(request):
     if request.method == "POST":
-        vis = Complain.objects.create()
+        vis = Complain.objects.create()  # creating object of complain class
 
         vis.name = request.POST['name']
         vis.email = request.POST['email']
@@ -249,9 +248,10 @@ def complain(request):
         return redirect('project:guest')
     return render(request, "guest_dashboard.html")
 
+
 def contact(request):
     if request.method == "POST":
-        vis = Contact.objects.create()
+        vis = Contact.objects.create()  # creating object of contact class
 
         vis.name = request.POST['name']
         vis.email = request.POST['email']
@@ -261,9 +261,10 @@ def contact(request):
         return redirect('project:guest')
     return render(request, "guest_dashboard.html")
 
+
 def contact_user(request):
     if request.method == "POST":
-        vis = Contact.objects.create()
+        vis = Contact.objects.create()  # creating object of contact class
 
         vis.name = request.POST['name']
         vis.email = request.POST['email']

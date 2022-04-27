@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Reset Password {% endblock %}
+
+
+{% block css %}
+{% endblock %}
+{% block body %}
+{% if error %}
+{{ error }}
+{% endif %}
+
+<form action="{% url 'project:resetpassword' %}" method="POST">{% csrf_token %}
+    <div class="container mt-5">
+   <div class="mb-3 col-sm-4">
+            <label for="email" class="form-label ">Enter the email</label>
+            <input type="email" class="form-control " id="email" name="email">
+
+<br>
+
+<button type="submit" class="btn btn-primary">Reset</button>
+
+   </div>
+    </div>
+
+</form>
+
+
+
+{% endblock %}

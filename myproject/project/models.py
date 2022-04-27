@@ -21,14 +21,11 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
 
-# class UserOTP(models.Model):
-#     user=models.ForeignKey(User, on_delete=models.CASCADE)
-#     time_st=models.DateTimeField(auto_now=True)
-#     otp=models.SmallIntegerField()
+
 
 class News(models.Model):
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     content = models.TextField()
     dateTime = models.DateTimeField(auto_now_add=True)
 

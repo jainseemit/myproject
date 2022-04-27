@@ -18,17 +18,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% block css %}
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@1,800&display=swap');
     body {
     color: white;
-    background: #95D1CC;
+    background-image:
+    url("https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80");
+
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'Roboto', sans-serif;
     overflow: scroll;
     }
     h4,h1{
     color: black;
+    font-family: 'Space Mono', monospace;
     }
     li {
-    color: black;
+    color: white;
     }
     .footer {
     position: fixed;
@@ -36,19 +42,20 @@
     bottom: 0;
     width: 100%;
     background-color: #404040;
+
     color: white;
     text-align: center;
     }
     .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    background-color: #a3a9ad;
+    background-color:rgba(255,255,255, .5);
     padding: 5px;
     }
     .grid-container2 {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
-    background-color: #a3a9ad;
+    background-color:rgba(255,255,255, .5);
     padding: 5px;
     }
     .grid-item {
@@ -59,7 +66,11 @@
     text-align: center;
     }
     .card-block {
+    padding:1px;
+    margin-top:1rem;
     min-height: 220px;
+    background-color:transparent;
+    font-family: 'Space Mono', monospace;
     }
     .main-container{
     overflow:scroll;
@@ -76,6 +87,108 @@
     color:black;
     }
 
+    button1 {
+    margin: 10px;
+    }
+    .custom-btn {
+    width: 230px;
+    height: 50px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    }
+
+    .btn-6 {
+    background: rgb(247,150,192);
+    background: radial-gradient(circle, rgba(247,150,192,1) 0%, rgba(118,174,241,1) 100%);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    }
+    .btn-6 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    }
+    .btn-6:before,
+    .btn-6:after {
+    position: absolute;
+    content: "";
+    height: 0%;
+    width: 1px;
+    box-shadow:
+    -1px -1px 20px 0px rgba(255,255,255,1),
+    -4px -4px 5px 0px rgba(255,255,255,1),
+    7px 7px 20px 0px rgba(0,0,0,.4),
+    4px 4px 5px 0px rgba(0,0,0,.3);
+    }
+    .btn-6:before {
+    right: 0;
+    top: 0;
+    transition: all 500ms ease;
+    }
+    .btn-6:after {
+    left: 0;
+    bottom: 0;
+    transition: all 500ms ease;
+    }
+    .btn-6:hover{
+    background: transparent;
+    color: #76aef1;
+    box-shadow: none;
+    }
+    .btn-6:hover:before {
+    transition: all 500ms ease;
+    height: 100%;
+    }
+    .btn-6:hover:after {
+    transition: all 500ms ease;
+    height: 100%;
+    }
+    .btn-6 span:before,
+    .btn-6 span:after {
+    position: absolute;
+    content: "";
+    box-shadow:
+    -1px -1px 20px 0px rgba(255,255,255,1),
+    -4px -4px 5px 0px rgba(255,255,255,1),
+    7px 7px 20px 0px rgba(0,0,0,.4),
+    4px 4px 5px 0px rgba(0,0,0,.3);
+    }
+    .btn-6 span:before {
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: .5px;
+    transition: all 500ms ease;
+    }
+    .btn-6 span:after {
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: .5px;
+    transition: all 500ms ease;
+    }
+    .btn-6 span:hover:before {
+    width: 100%;
+    }
+    .btn-6 span:hover:after {
+    width: 100%;
+    }
+
+
     <!--    .main-container::-webkit-scrollbar {-->
     <!--  display: none;-->
     <!--}-->
@@ -84,12 +197,15 @@
 {% block body %}
 
 
-<h1><strong>
-    <center> Recent News</center>
-</strong></h1>
-
 <center>
-    <div class="main-container " style="width: 80rem; height: 15rem;">
+    <br>
+    <h1><strong>
+        <center> Recent News</center>
+    </strong></h1>
+    <br>
+    <div class="main-container " style="width: 80rem; height: 15rem; background-color:rgba(255,255,255, .5)">
+
+
         <div class="container-fluid">
 
             <div class="row flex-row flex-nowrap">
@@ -98,8 +214,6 @@
                     <div class="card card-block">
 
                         <h2><p>{{nws.title}}</p></h2>
-                        <p>{{nws.author}}</p>
-
                         <p>{{nws.content}}</p>
 
                     </div>
@@ -112,13 +226,16 @@
     </div>
 </center>
 
-</hr>
-<h1><strong>
+<br>
 
-    <center>Society's Flats on Rent or Buy</center>
-</strong></h1>
+<div class="container my-4" style="background-color:rgba(255,255,255, .5)">
+    <br>
+    </hr>
+    <h1><strong>
 
-<div class="container my-4">
+        <center>Society's Flats on Rent or Buy</center>
+    </strong></h1>
+    <br>
 
 
     <!--Carousel Wrapper-->
@@ -246,10 +363,12 @@
 <center>
     <div style="width: 70rem;">
         <div class="grid-container">
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}"> AC Service</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Home Service</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest'%}">Pest Control</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Groceries</a></h4></div>
+            <button1 class="custom-btn btn-6"><span>AC Service</span></button1>
+            <button1 class="custom-btn btn-6"><span>Home Service</span></button1>
+            <button1 class="custom-btn btn-6"><span>Pest Control</span></button1>
+            <button1 class="custom-btn btn-6"><span>Groceries</span></button1>
+
+
         </div>
     </div>
 </center>
@@ -259,20 +378,21 @@
 </strong></h1>
 <br>
 <center>
-    <div style="width: 90rem; height: 10rem;">
-        <div class="grid-container2">
-            <div class="grid-item"><h4><a href="{% url 'project:resident' %}"> Residents List</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Emergency Numbers</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Daily Helps</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Documents</a></h4></div>
-            <div class="grid-item"><h4><a href="{% url 'project:guest' %}">Communications</a></h4></div>
+    <div style="width: 70rem; height: 10rem;">
+        <div class="grid-container">
+            <!--            <div class="grid-item"><h4><a href="{% url 'project:resident' %}"> Residents List</a></h4></div>-->
+            <button1 class="custom-btn btn-6"><span>Emergency Numbers</span></button1>
+            <button1 class="custom-btn btn-6"><span>Daily Helps</span></button1>
+            <button1 class="custom-btn btn-6"><span>Documents</span></button1>
+            <button1 class="custom-btn btn-6"><span>Communications</span></button1>
+
         </div>
     </div>
 </center>
 <!-- Grid container -->
-<div class="container p-4">
+<div class="container p-3">
     <!-- Section: Social media -->
-    <section class="mb-4" style="background-color:rgba(255,255,255, .5);">
+    <section class="mb-3" style="background-color:rgba(255,255,255, .5);">
         <!-- Default form contact -->
         <form class="text-center border border-light p-5" action="{% url 'project:complain' %}" method="POST">
             {% csrf_token %}
@@ -315,7 +435,7 @@
 
 
 <!-- Default form contact -->
-<footer class="bg-dark text-center text-white">
+<footer class="bg-dark text-center text-dark" style="background-color:rgba(255,255,255, .5);">
     <!-- Grid container -->
     <div class="container p-4">
         <!-- Section: Social media -->
@@ -354,7 +474,7 @@
 
 
         <!-- Section: Text -->
-        <section class="mb-4">
+        <section class="mb-4" style="background-color:rgba(255,255,255, .5);font-family: 'Space Mono', monospace;">
             <!--Section: Contact v.2-->
             <section class="mb-4">
 
@@ -373,7 +493,7 @@
 
                             <form id="contact-form" name="contact-form" action="{% url 'project:contact' %}"
                                   method="POST">
-                                 {% csrf_token %}
+                                {% csrf_token %}
 
                                 <!--Grid row-->
                                 <div class="row">
@@ -431,6 +551,7 @@
                                     <button class="btn btn-primary" type="submit">Send</button>
 
                                 </center>
+                                <br>
 
                             </form>
 
@@ -447,11 +568,11 @@
 
     </div>
     <!-- Grid container -->
-    <h2>Kailash Residency</h2>
-    <p>Medical Road, Jhansi.
+    <h2 style="color:white">Kailash Residency</h2>
+    <p style="color:white">Medical Road, Jhansi.
         <strong>Secretary:</strong> R.K Jain Mob.no.: 1234567890</p>
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3 text-white" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2020 Copyright:
         <a class="text-white" href="https://tftus.com/">tftus.com</a>
     </div>

@@ -7,9 +7,12 @@
 {% block css %}
 
 
-body {
-font-family: 'Nunito', sans-serif;
-color: #384047;
+body{
+ background-image:
+    url("https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80");
+
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 form {
@@ -129,6 +132,7 @@ a{
     {% endfor %}
     {% endif %}
 </main>
+
 <div class="row">
     <div class="col-md-12">
         <form action="{% url 'project:rent' %}" method="post">{% csrf_token %}
@@ -147,7 +151,7 @@ a{
                 <input type="email" id="email" name="email" required>
 
                 <label for="mobile">Mobile No:</label>
-                <input type="number" id="mobile" name="mobile" required>
+                <input type="number" id="mobile" name="mobile" required onkeypress="return event.charCode >= 48" min="1">
 
 
             </fieldset>
@@ -170,26 +174,28 @@ a{
                 <br>
                 <br>
                 <strong><label for="members">No of members:</label></strong>
-                <input type="number" id="members" name="member" required>
+
+                <input type="number" id="members" name="member" required onkeypress="return event.charCode >= 48" min="1">
 
                 <br>
 
 
                 <strong><label>Facilities:</label></strong>
-                <input type="checkbox" id="pool" value=True name="pool" required><label
+                <input type="checkbox" id="pool" value=True name="pool" ><label
                     class="light" for="pool">Pool</label><br>
-                <input type="checkbox" id="gym" value=True name="gym" required><label class="light" for="gym">Gym</label><br>
-                <input type="checkbox" id="creche" value=True name="creche" required><label class="light"
+                <input type="checkbox" id="gym" value=True name="gym" ><label class="light" for="gym">Gym</label><br>
+                <input type="checkbox" id="creche" value=True name="creche" ><label class="light"
                                                                                        for="creche">Creche</label>
 
             </fieldset>
 
             <center><button type="submit" class="btn btn-primary">Submit</button></center>
-
+            <br>
+<div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
+</div>
         </form>
     </div>
 </div>
 
-<div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
-</div>
+
 {% endblock %}

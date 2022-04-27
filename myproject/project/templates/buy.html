@@ -3,15 +3,15 @@
 {% block title %} Buy page {% endblock %}
 
 
-
 {% block css %}
 
+body{
+background-image:
+url("https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80");
 
-body {
-font-family: 'Nunito', sans-serif;
-color: #384047;
+background-repeat: no-repeat;
+background-size: cover;
 }
-
 form {
 max-width: 300px;
 margin: 10px auto;
@@ -115,8 +115,8 @@ max-width: 480px;
 }
 
 a{
-    color:inherit;
-    }
+color:inherit;
+}
 
 {% endblock %}
 {% block body %}
@@ -130,63 +130,69 @@ a{
     {% endif %}
 </main>
 <div class="row">
-    <div class="col-md-12" style="background-color:rgba(255,255,255, .5);">
-        <form action="{% url 'project:buy' %}" method="post">{% csrf_token %}
-            <h1> Buy Flat </h1>
+    <div class="col-md-12"
+    ">
+    <form action="{% url 'project:buy' %}" method="post">{% csrf_token %}
+        <h1> Buy Flat </h1>
 
-            <fieldset>
+        <fieldset>
 
-                <strong><legend><span class="number">1</span> Your Basic Info</legend></strong><br>
-                <hr>
-
-
-                <strong><label for="name">Name:</label></strong>
-                <input type="text" id="name" name="name">
-
-                <strong><label for="email">Email:</label></strong>
-                <input type="email" id="email" name="email">
-
-                <strong><label for="mobile">Mobile No:</label></strong>
-                <input type="number" id="mobile" name="mobile">
+            <strong>
+                <legend><span class="number">1</span> Your Basic Info</legend>
+            </strong><br>
+            <hr>
 
 
-            </fieldset>
-            <fieldset>
+            <strong><label for="name">Name:</label></strong>
+            <input type="text" id="name" name="name">
 
-                <legend><span class="number">2</span> Your Requirements</legend>
-                <hr>
+            <strong><label for="email">Email:</label></strong>
+            <input type="email" id="email" name="email">
 
-                <br>
-                <strong><label>Flat size:</label></strong>
-                <input type="radio" id="1bhk" name="flat_size" value="1 bhk"><label for="1bhk" class="light"> 1 BHK </label><br>
-                <input type="radio" id="2bhk" name="flat_size" value="2 bhk"><label for="2bhk" class="light"> 2 BHK </label><br>
-                <input type="radio" id="3bhk" name="flat_size" value="3 bhk"><label for="3bhk" class="light"> 3 BHK </label><br>
-
-                <br>
-                <strong><label>Flat type:</label></strong>
-                <input type="radio" id="furnished" name="furnished" value="furnished"><label for="furnished" class="light">Furnished</label><br>
-                <input type="radio" id="Not furnished" name="furnished" value="not_furnished"><label for="Not furnished" class="light">Non-furnished</label>
-
-                <br>
-                <br>
+            <strong><label for="mobile">Mobile No:</label></strong>
+            <input type="number" id="mobile" name="mobile" onkeypress="return event.charCode >= 48" min="1">
 
 
-                <strong><label>EMI available:</label></strong>
-                <label>HDFC Bank @ 5%</label>
-                <label>SBI Bank @ 5.25%</label>
-                <label>Axis Bank @ 5%</label>
-                <label>Union Bank @ 6%</label>
+        </fieldset>
+        <fieldset>
+
+            <legend><span class="number">2</span> Your Requirements</legend>
+            <hr>
+
+            <br>
+            <strong><label>Flat size:</label></strong>
+            <input type="radio" id="1bhk" name="flat_size" value="1 bhk"><label for="1bhk" class="light"> 1 BHK </label><br>
+            <input type="radio" id="2bhk" name="flat_size" value="2 bhk"><label for="2bhk" class="light"> 2 BHK </label><br>
+            <input type="radio" id="3bhk" name="flat_size" value="3 bhk"><label for="3bhk" class="light"> 3 BHK </label><br>
+
+            <br>
+            <strong><label>Flat type:</label></strong>
+            <input type="radio" id="furnished" name="furnished" value="furnished"><label for="furnished" class="light">Furnished</label><br>
+            <input type="radio" id="Not furnished" name="furnished" value="not_furnished"><label for="Not furnished"
+                                                                                                 class="light">Non-furnished</label>
+
+            <br>
+            <br>
 
 
+            <strong><label>EMI available:</label></strong>
+            <label>HDFC Bank @ 5%</label>
+            <label>SBI Bank @ 5.25%</label>
+            <label>Axis Bank @ 5%</label>
+            <label>Union Bank @ 6%</label>
 
-            </fieldset>
 
-            <center><button type="submit" class="btn btn-primary">Submit</buMultiValueDictKeyError at /project/buy/tton></center>
+        </fieldset>
 
-        </form>
-    </div>
+        <center>
+            <button type="submit" class="btn btn-primary">Submit</buMultiValueDictKeyError at /project/buy/tton>
+        </center>
+        <br>
+        <div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
+</div>
+</form>
+</div>
 </div>
 
-<div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
-</div>
+
 {% endblock %}

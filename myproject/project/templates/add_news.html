@@ -4,12 +4,24 @@
 {% block add_news_active %} active {% endblock add_news_active %}
 
 {% block css %}
+body{
+ background-image:
+    url("https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 {% endblock %}
 {% block body %}
-<form action="/project/add_news/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-<div class="container mt-4">
+<form   method="POST"> {% csrf_token %}
+<div class="container mt-4" style="background-color:rgba(255,255,255, .5);">
+    <br>
 {{ form.as_p }}
+    <center>
 <button class="btn btn-primary">Add News</button>
+
+    </center>
+    <br>
 </div>
 </form>
 {% endblock %}

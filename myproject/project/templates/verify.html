@@ -19,9 +19,16 @@
 <br>
 
 <button type="submit" class="btn btn-primary">Verify OTP</button>
+
    </div>
     </div>
 
 </form>
+   <div class="container mt-5">
+   <div class="mb-2 col-sm-4">
+<a href="{% url 'project:verify' %}"><button class="btn btn-primary" >Resend OTP</button></a>
+   </div>
+   </div>
+
 
 {% endblock %}

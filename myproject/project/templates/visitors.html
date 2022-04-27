@@ -7,9 +7,12 @@
 {% block css %}
 
 
-body {
-font-family: 'Nunito', sans-serif;
-color: #384047;
+body{
+ background-image:
+    url("https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80");
+
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 form {
@@ -129,8 +132,8 @@ a{
     {% endfor %}
     {% endif %}
 </main>
-<div class="row">
-    <div class="col-md-12">
+<div class="row" >
+    <div class="col-md-12" >
         <form action="{% url 'project:visitors' %}" method="post">{% csrf_token %}
             <h1> Add Visitors </h1>
 
@@ -160,11 +163,14 @@ a{
 
 
             <center><button type="submit" class="btn btn-primary">Submit</button></center>
-
+            <br>
+            <div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
+</div>
         </form>
+
     </div>
+
 </div>
 
-<div class="text-center">Click here to go? <a href="{% url 'project:guest' %}">Home</a></div>
-</div>
+
 {% endblock %}
